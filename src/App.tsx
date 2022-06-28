@@ -9,7 +9,7 @@ function App(): JSX.Element {
     <Routes>
       <Route path="/" element={<Navigation />}>
         <Route index element={<Home />} />
-        <Route path="" element={<Authentication />} />
+        <Route path="auth" element={<Authentication />} />
       </Route>
     </Routes>
   );

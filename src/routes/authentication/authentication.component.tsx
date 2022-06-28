@@ -1,9 +1,7 @@
+import SignInForm from 'components/sign-in-form/sign-in-form.component';
+
 function Authentication(): JSX.Element {
-  return (
-    <div>
-      <h1>fuck</h1>
-    </div>
-  );
+  return <SignInForm />;
 }
 
 export default Authentication;

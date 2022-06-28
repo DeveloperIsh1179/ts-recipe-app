@@ -18,12 +18,11 @@ function Navigation(): JSX.Element {
           <NavLink to="search">SEARCH</NavLink>
         </NavLinksContainer>
         <NavLinksContainer>
-          <NavLink to="login">LOG IN</NavLink>
+          <NavLink to="/auth">LOG IN</NavLink>
         </NavLinksContainer>
       </NavigationContainer>
       <Outlet />
     </div>
-
   );
 }
 
