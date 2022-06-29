@@ -10,7 +10,7 @@ const poolData = {
 
 const cognitoUserPool = new CognitoUserPool(poolData);
 
-export const createCognitoSignUp = (
+export const createCognitoSignUp = async (
   email: string,
   password: string,
   userName: string,
@@ -34,7 +34,7 @@ export const createCognitoSignUp = (
   attributeList.push(attributeEmail);
   attributeList.push(attributeName);
 
-  cognitoUserPool.signUp(
+  await cognitoUserPool.signUp(
     userName,
     password,
     attributeList,
