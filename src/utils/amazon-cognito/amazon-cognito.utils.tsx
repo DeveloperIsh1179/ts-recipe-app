@@ -34,7 +34,7 @@ export const createCognitoSignUp = async (
   attributeList.push(attributeEmail);
   attributeList.push(attributeName);
 
-  await cognitoUserPool.signUp(
+  cognitoUserPool.signUp(
     userName,
     password,
     attributeList,

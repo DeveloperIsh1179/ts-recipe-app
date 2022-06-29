@@ -20,9 +20,11 @@ function SignInForm(): JSX.Element {
 
     setFormFields({ ...formFields, [inputName]: value });
   };
+
   const handleOnSubmit = (event: FormEvent) => {
     event.preventDefault();
     createCognitoSignUp(email, password, userName, name);
+    setFormFields(defaultFormFields);
   };
 
   return (
@@ -48,7 +50,7 @@ function SignInForm(): JSX.Element {
             onChange={handleOnChange}
           />
         </label>
-        <label htmlFor='email'>
+        <label htmlFor="email">
           EMAIL:
           <Input
             id="email"
