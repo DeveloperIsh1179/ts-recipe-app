@@ -1,6 +1,7 @@
 import { ChangeEvent, useState, FormEvent } from 'react';
 import { createCognitoSignUp } from 'utils/amazon-cognito/amazon-cognito.utils';
-import { Input, SignInContainer } from './sign-in-form.styles';
+import FormInput from 'components/form-input/form-input.component';
+import { SignUpContainer, HeaderContainer } from './sign-in-form.styles';
 
 const defaultFormFields = {
   email: '',
@@ -17,7 +18,6 @@ function SignInForm(): JSX.Element {
 
   const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name: inputName, value } = event.target;
-
     setFormFields({ ...formFields, [inputName]: value });
   };
 
@@ -28,51 +28,47 @@ function SignInForm(): JSX.Element {
   };
 
   return (
-    <SignInContainer>
+    <SignUpContainer>
+      <HeaderContainer>
+        <h1>SIGN UP</h1>
+        <h1>LOG IN</h1>
+      </HeaderContainer>
       <form onSubmit={handleOnSubmit}>
-        <label htmlFor="name">
-          NAME:
-          <Input
-            id="name"
-            type="text"
-            name="name"
-            value={name}
-            onChange={handleOnChange}
-          />
-        </label>
-        <label htmlFor="username">
-          USERNAME:
-          <Input
-            id="username"
-            type="text"
-            name="userName"
-            value={userName}
-            onChange={handleOnChange}
-          />
-        </label>
-        <label htmlFor="email">
-          EMAIL:
-          <Input
-            id="email"
-            type="email"
-            name="email"
-            value={email}
-            onChange={handleOnChange}
-          />
-        </label>
-        <label htmlFor="password">
-          PASSWORD:
-          <Input
-            id="password"
-            type="password"
-            name="password"
-            value={password}
-            onChange={handleOnChange}
-          />
-        </label>
+        <FormInput
+          label="USERNAME"
+          required
+          type="text"
+          name="userName"
+          value={userName}
+          onChange={handleOnChange}
+        />
+        <FormInput
+          label="NAME"
+          required
+          type="text"
+          name="userName"
+          value={userName}
+          onChange={handleOnChange}
+        />
+        <FormInput
+          label="EMAIL"
+          required
+          type="email"
+          name="userName"
+          value={userName}
+          onChange={handleOnChange}
+        />
+        <FormInput
+          label="PASSWORD"
+          required
+          type="password"
+          name="userName"
+          value={userName}
+          onChange={handleOnChange}
+        />
         <button type="submit">submit</button>
       </form>
-    </SignInContainer>
+    </SignUpContainer>
   );
 }
 
