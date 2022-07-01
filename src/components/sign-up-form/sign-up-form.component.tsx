@@ -1,16 +1,19 @@
-import { useState, ChangeEvent, FormEvent } from 'react';
+import { ChangeEvent, useState, FormEvent } from 'react';
+import { createCognitoSignUp } from 'utils/amazon-cognito/amazon-cognito.utils';
 import FormInput from 'components/form-input/form-input.component';
-import { SignInContainer } from './sign-in-form.styles';
+import { SignUpContainer } from './sign-up-form.styles';
 
 const defaultFormFields = {
-  userName: '',
+  email: '',
+  name: '',
   password: '',
+  userName: '',
 };
 
-function SignInForm(): JSX.Element {
+function SignUpForm(): JSX.Element {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const {
-    password, userName,
+    email, password, userName, name,
   } = formFields;
 
   const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -20,10 +23,12 @@ function SignInForm(): JSX.Element {
 
   const handleOnSubmit = (event: FormEvent) => {
     event.preventDefault();
+    createCognitoSignUp(email, password, userName, name);
     setFormFields(defaultFormFields);
   };
+
   return (
-    <SignInContainer>
+    <SignUpContainer>
       <form onSubmit={handleOnSubmit}>
         <FormInput
           label="USERNAME"
@@ -41,10 +46,26 @@ function SignInForm(): JSX.Element {
           value={userName}
           onChange={handleOnChange}
         />
+        <FormInput
+          label="EMAIL"
+          required
+          type="email"
+          name="userName"
+          value={userName}
+          onChange={handleOnChange}
+        />
+        <FormInput
+          label="PASSWORD"
+          required
+          type="password"
+          name="userName"
+          value={userName}
+          onChange={handleOnChange}
+        />
         <button type="submit">submit</button>
       </form>
-    </SignInContainer>
+    </SignUpContainer>
   );
 }
 
-export default SignInForm;
+export default SignUpForm;

@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import { BrowserRouter } from 'react-router-dom';
+import { FormProvider } from 'contexts/form.context';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
@@ -11,7 +12,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <FormProvider>
+        <App />
+      </FormProvider>
     </BrowserRouter>
   </React.StrictMode>,
 );
