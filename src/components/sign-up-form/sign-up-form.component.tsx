@@ -42,24 +42,24 @@ function SignUpForm(): JSX.Element {
           label="NAME"
           required
           type="text"
-          name="userName"
-          value={userName}
+          name="name"
+          value={name}
           onChange={handleOnChange}
         />
         <FormInput
           label="EMAIL"
           required
           type="email"
-          name="userName"
-          value={userName}
+          name="email"
+          value={email}
           onChange={handleOnChange}
         />
         <FormInput
           label="PASSWORD"
           required
           type="password"
-          name="userName"
-          value={userName}
+          name="password"
+          value={password}
           onChange={handleOnChange}
         />
         <button type="submit">submit</button>

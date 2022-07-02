@@ -1,5 +1,6 @@
 import { useState, ChangeEvent, FormEvent } from 'react';
 import FormInput from 'components/form-input/form-input.component';
+import { signInCognito } from 'utils/amazon-cognito/amazon-cognito.utils';
 import { SignInContainer } from './sign-in-form.styles';
 
 const defaultFormFields = {
@@ -20,6 +21,7 @@ function SignInForm(): JSX.Element {
 
   const handleOnSubmit = (event: FormEvent) => {
     event.preventDefault();
+    signInCognito(userName, password);
     setFormFields(defaultFormFields);
   };
   return (
@@ -34,11 +36,11 @@ function SignInForm(): JSX.Element {
           onChange={handleOnChange}
         />
         <FormInput
-          label="NAME"
+          label="PASSWORD"
           required
-          type="text"
-          name="userName"
-          value={userName}
+          type="password"
+          name="password"
+          value={password}
           onChange={handleOnChange}
         />
         <button type="submit">submit</button>
