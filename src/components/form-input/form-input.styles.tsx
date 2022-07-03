@@ -37,6 +37,7 @@ background-color: white;
 color: ${subColor};
 font-size: 18px;
 padding:10px 10px 10px 5px;
+font-family: 'Yellowtail', cursive;
 display: block;
 width: 100%;
 border: none;

@@ -7,13 +7,12 @@ const defaultFormFields = {
   email: '',
   name: '',
   password: '',
-  userName: '',
 };
 
 function SignUpForm(): JSX.Element {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const {
-    email, password, userName, name,
+    email, password, name,
   } = formFields;
 
   const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -23,21 +22,13 @@ function SignUpForm(): JSX.Element {
 
   const handleOnSubmit = (event: FormEvent) => {
     event.preventDefault();
-    createCognitoSignUp(email, password, userName, name);
+    createCognitoSignUp(email, password, name);
     setFormFields(defaultFormFields);
   };
 
   return (
     <SignUpContainer>
       <form onSubmit={handleOnSubmit}>
-        <FormInput
-          label="USERNAME"
-          required
-          type="text"
-          name="userName"
-          value={userName}
-          onChange={handleOnChange}
-        />
         <FormInput
           label="NAME"
           required

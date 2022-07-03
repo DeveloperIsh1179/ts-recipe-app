@@ -15,7 +15,6 @@ const cognitoUserPool = new CognitoUserPool(poolData);
 export const createCognitoSignUp = async (
   email: string,
   password: string,
-  userName: string,
   name: string,
 ) => {
   const attributeList = [];
@@ -30,18 +29,12 @@ export const createCognitoSignUp = async (
     Value: name,
   };
 
-  // const dataUsername = {
-  //   Name: 'username',
-  //   Value: userName,
-  // };
-
   const attributeEmail = new CognitoUserAttribute(dataEmail);
   const attributeName = new CognitoUserAttribute(dataName);
-  // const attributeUsername = new CognitoUserAttribute(dataUsername);
 
   attributeList.push(attributeEmail);
   attributeList.push(attributeName);
-  // attributeList.push(attributeUsername);
+
   cognitoUserPool.signUp(
     email,
     password,
