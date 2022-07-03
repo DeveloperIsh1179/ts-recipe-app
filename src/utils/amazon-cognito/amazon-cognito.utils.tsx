@@ -4,11 +4,10 @@ import {
   AuthenticationDetails,
   CognitoUser,
 } from 'amazon-cognito-identity-js';
-import * as AWS from 'aws-sdk/global';
 
 const poolData = {
-  UserPoolId: 'us-east-1_Bui1KkGWV',
-  ClientId: '2rtmgbtsnh5avq80cn4cal0obq',
+  UserPoolId: 'us-east-1_vMz61D3Ny',
+  ClientId: '6tbs22jd58v5oi9pv7farhiadq',
 };
 
 const cognitoUserPool = new CognitoUserPool(poolData);
@@ -31,14 +30,20 @@ export const createCognitoSignUp = async (
     Value: name,
   };
 
+  // const dataUsername = {
+  //   Name: 'username',
+  //   Value: userName,
+  // };
+
   const attributeEmail = new CognitoUserAttribute(dataEmail);
   const attributeName = new CognitoUserAttribute(dataName);
+  // const attributeUsername = new CognitoUserAttribute(dataUsername);
 
   attributeList.push(attributeEmail);
   attributeList.push(attributeName);
-
+  // attributeList.push(attributeUsername);
   cognitoUserPool.signUp(
-    userName,
+    email,
     password,
     attributeList,
     null!,
@@ -52,32 +57,23 @@ export const createCognitoSignUp = async (
 };
 
 export const signInCognito = (username: string, password: string) => {
-  const authenticationData = {
-    Username: username,
-    Password: password,
-  };
-
-  const authenticationDetails = new AuthenticationDetails(
-    authenticationData,
-  );
-  console.log('authenticationDetails', authenticationDetails);
-
-  const userData = {
+  const cognitoUser = new CognitoUser({
     Username: username,
     Pool: cognitoUserPool,
-  };
-  console.log('userData', userData);
-
-  const cognitoUser = new CognitoUser(userData);
-
+  });
   console.log('cognitoUser', cognitoUser);
 
-  return new Promise((resolve, reject) => cognitoUser.authenticateUser(authenticationDetails, {
-    onSuccess: (result) => {
-      resolve(result);
+  const authDetails = new AuthenticationDetails({
+    Username: username,
+    Password: password,
+  });
+
+  cognitoUser.authenticateUser(authDetails, {
+    onSuccess: (data) => {
+      console.log('onSuccess: ', data);
     },
     onFailure: (err) => {
-      reject(err);
+      console.log('onFailure: ', err);
     },
-  }));
+  });
 };

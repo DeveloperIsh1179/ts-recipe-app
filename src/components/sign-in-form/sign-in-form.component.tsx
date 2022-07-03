@@ -22,7 +22,7 @@ function SignInForm(): JSX.Element {
   const handleOnSubmit = (event: FormEvent) => {
     event.preventDefault();
     signInCognito(userName, password);
-    setFormFields(defaultFormFields);
+    // setFormFields(defaultFormFields);
   };
   return (
     <SignInContainer>
