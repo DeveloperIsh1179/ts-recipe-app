@@ -3,6 +3,7 @@ import {
   CognitoUserAttribute,
   AuthenticationDetails,
   CognitoUser,
+  CognitoUserSession,
 } from 'amazon-cognito-identity-js';
 
 const poolData = {
@@ -49,12 +50,14 @@ export const createCognitoSignUp = async (
   );
 };
 
-export const signInCognito = (username: string, password: string) => {
+export const signInCognito = (
+  username: string,
+  password: string,
+): Promise <CognitoUserSession> => new Promise((resolve) => {
   const cognitoUser = new CognitoUser({
     Username: username,
     Pool: cognitoUserPool,
   });
-  console.log('cognitoUser', cognitoUser);
 
   const authDetails = new AuthenticationDetails({
     Username: username,
@@ -63,10 +66,10 @@ export const signInCognito = (username: string, password: string) => {
 
   cognitoUser.authenticateUser(authDetails, {
     onSuccess: (data) => {
-      console.log('onSuccess: ', data);
+      resolve(data);
     },
     onFailure: (err) => {
-      console.log('onFailure: ', err);
+      resolve(err);
     },
   });
-};
+});

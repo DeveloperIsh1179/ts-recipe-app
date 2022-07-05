@@ -1,7 +1,11 @@
 import { useState, ChangeEvent, FormEvent } from 'react';
 import FormInput from 'components/form-input/form-input.component';
 import { signInCognito } from 'utils/amazon-cognito/amazon-cognito.utils';
+import { CognitoUserSession } from 'amazon-cognito-identity-js';
+import { ToastContainer, toast } from 'react-toastify';
 import { SignInContainer } from './sign-in-form.styles';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 const defaultFormFields = {
   userName: '',
@@ -19,13 +23,19 @@ function SignInForm(): JSX.Element {
     setFormFields({ ...formFields, [inputName]: value });
   };
 
-  const handleOnSubmit = (event: FormEvent) => {
+  const handleOnSubmit = async (event: FormEvent) => {
     event.preventDefault();
-    signInCognito(userName, password);
+    const result = await signInCognito(userName, password);
+    if (result instanceof CognitoUserSession) {
+      toast.success('Logged in successfully.');
+    } else {
+      toast.error(`Log in failed: ${result}.`);
+    }
     setFormFields(defaultFormFields);
   };
   return (
     <SignInContainer>
+      <ToastContainer />
       <form onSubmit={handleOnSubmit}>
         <FormInput
           label="USERNAME"
