@@ -6,9 +6,12 @@ import {
   CognitoUserSession,
 } from 'amazon-cognito-identity-js';
 
+const userPoolId = process.env.REACT_APP_COGNITO_USER_POOL_ID;
+const clientId = process.env.REACT_APP_COGNITO_CLIENT_ID;
+
 const poolData = {
-  UserPoolId: 'us-east-1_vMz61D3Ny',
-  ClientId: '6tbs22jd58v5oi9pv7farhiadq',
+  UserPoolId: userPoolId,
+  ClientId: clientId,
 };
 
 const cognitoUserPool = new CognitoUserPool(poolData);

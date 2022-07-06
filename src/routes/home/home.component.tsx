@@ -12,7 +12,7 @@ function Home(): JSX.Element {
     <div>
       <ImageContainer>
         {images.map((image) => (
-          <Images src={image} alt={image} />
+          <Images key={image} src={image} alt={image} />
         ))}
       </ImageContainer>
     </div>
