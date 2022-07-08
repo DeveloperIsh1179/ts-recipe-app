@@ -19,7 +19,7 @@ export const createCognitoSignUp = async (
   email: string,
   password: string,
   name: string,
-):Promise<ISignUpResult | Error | undefined> => new Promise((resolve, reject) => {
+):Promise<ISignUpResult | Error | undefined> => new Promise((resolve) => {
   const attributeList = [];
 
   const dataEmail = {
@@ -76,7 +76,8 @@ export const signInCognito = (
   });
 });
 
-export const getSessionCognito = async (): Promise<CognitoUserSession | Error | null> => new Promise((resolve, reject) => {
+export const getSessionCognito = async ():
+Promise<CognitoUserSession | Error | null> => new Promise((resolve, reject) => {
   const user = cognitoUserPool.getCurrentUser();
   if (user) {
     user.getSession((err: Error, session: CognitoUserSession | null) => {

@@ -1,7 +1,6 @@
 import { ChangeEvent, useState, FormEvent } from 'react';
 import { createCognitoSignUp } from 'utils/amazon-cognito/amazon-cognito.utils';
 import FormInput from 'components/form-input/form-input.component';
-import type { ISignUpResult } from 'amazon-cognito-identity-js';
 import { toast, ToastContainer } from 'react-toastify';
 import { SignUpContainer } from './sign-up-form.styles';
 
@@ -25,6 +24,7 @@ function SignUpForm(): JSX.Element {
   const handleOnSubmit = async (event: FormEvent) => {
     event.preventDefault();
     const result = await createCognitoSignUp(email, password, name);
+    console.log(result);
     if (result instanceof Error) {
       toast.error(result.message);
     } else if (!result) {

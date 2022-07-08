@@ -1,8 +1,11 @@
-import { useState, ChangeEvent, FormEvent } from 'react';
+import {
+  useState, ChangeEvent, FormEvent, useContext,
+} from 'react';
 import FormInput from 'components/form-input/form-input.component';
 import { signInCognito } from 'utils/amazon-cognito/amazon-cognito.utils';
 import { CognitoUserSession } from 'amazon-cognito-identity-js';
 import { ToastContainer, toast } from 'react-toastify';
+import { CognitoSessionContext } from 'contexts/cognito-session.context';
 import { SignInContainer } from './sign-in-form.styles';
 
 import 'react-toastify/dist/ReactToastify.css';
@@ -13,7 +16,9 @@ const defaultFormFields = {
 };
 
 function SignInForm(): JSX.Element {
+  const { setInSession } = useContext(CognitoSessionContext);
   const [formFields, setFormFields] = useState(defaultFormFields);
+
   const {
     password, userName,
   } = formFields;
@@ -27,6 +32,7 @@ function SignInForm(): JSX.Element {
     event.preventDefault();
     const result = await signInCognito(userName, password);
     if (result instanceof CognitoUserSession) {
+      setInSession(true);
       toast.success('Logged in successfully.');
     } else {
       toast.error(`Log in failed: ${result}.`);

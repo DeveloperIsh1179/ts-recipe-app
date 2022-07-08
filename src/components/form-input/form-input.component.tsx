@@ -10,16 +10,18 @@ interface InputProps {
   onChange: (event: ChangeEvent<HTMLInputElement>) => void
 }
 
-interface LabelProps {
-  shrink: () => void
-}
-
 function FormInput({
   label, required, name, type, value, onChange,
 }: InputProps): JSX.Element {
   return (
     <Group>
-      <Input required={required} name={name} type={type} value={value} onChange={onChange} />
+      <Input
+        required={required}
+        name={name}
+        type={type}
+        value={value}
+        onChange={onChange}
+      />
       {label
         && (
         <FormInputLabel shrink={value.length}>

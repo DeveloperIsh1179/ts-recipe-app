@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import { BrowserRouter } from 'react-router-dom';
 import { FormProvider } from 'contexts/form.context';
+import { CognitoSessionProvider } from 'contexts/cognito-session.context';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
@@ -12,9 +13,11 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <FormProvider>
-        <App />
-      </FormProvider>
+      <CognitoSessionProvider>
+        <FormProvider>
+          <App />
+        </FormProvider>
+      </CognitoSessionProvider>
     </BrowserRouter>
   </React.StrictMode>,
 );

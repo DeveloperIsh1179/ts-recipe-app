@@ -5,21 +5,22 @@ import React, {
 type CognitoSessionContextType = {
   inSession: boolean
   setInSession: Dispatch<SetStateAction<boolean>>
-
 }
 
 const defaultState = {
   inSession: false,
   setInSession: () => null,
-
 };
-const CognitoSessionContext = createContext<CognitoSessionContextType>(defaultState);
+
+export const CognitoSessionContext = createContext<CognitoSessionContextType>(defaultState);
 
 type CognitoSessionProviderProps = {
   children: React.ReactNode;
 }
 
-export function CognitoSessionProvider({ children }: CognitoSessionProviderProps) {
+export function CognitoSessionProvider(
+  { children }: CognitoSessionProviderProps,
+) {
   const [inSession, setInSession] = useState<boolean>(false);
 
   const value = useMemo(() => ({
