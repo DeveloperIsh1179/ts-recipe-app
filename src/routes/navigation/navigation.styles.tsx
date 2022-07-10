@@ -15,12 +15,19 @@ export const LogoContainer = styled(Link)`
   padding: 25px;
 `;
 
-export const NavLinksContainer = styled.div`
+export const NavLinkContainer = styled.div`
   width: 50%;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: flex-end;
+`;
+
+export const NavLinksContainer = styled.div`
+width: 25%;
+height: 100%;
+display: flex;
+align-items: center;
 `;
 
 export const NavLink = styled(Link)`

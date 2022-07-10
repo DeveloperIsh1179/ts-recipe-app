@@ -5,6 +5,7 @@ import {
   NavigationContainer,
   NavLinksContainer,
   NavLink,
+  NavLinkContainer,
 } from './navigation.styles';
 
 function Navigation(): JSX.Element {
@@ -15,10 +16,12 @@ function Navigation(): JSX.Element {
           <Chef />
         </LogoContainer>
         <NavLinksContainer>
-          <NavLink to="search">SEARCH</NavLink>
-        </NavLinksContainer>
-        <NavLinksContainer>
-          <NavLink to="/auth">LOG IN</NavLink>
+          <NavLinkContainer>
+            <NavLink to="search">SEARCH</NavLink>
+          </NavLinkContainer>
+          <NavLinkContainer>
+            <NavLink to="/auth">LOG IN</NavLink>
+          </NavLinkContainer>
         </NavLinksContainer>
       </NavigationContainer>
       <Outlet />
