@@ -2,6 +2,7 @@ import {
   useState, ChangeEvent, FormEvent, useContext,
 } from 'react';
 import FormInput from 'components/form-input/form-input.component';
+import Button from 'components/button/button.component';
 import { signInCognito } from 'utils/amazon-cognito/amazon-cognito.utils';
 import { CognitoUserSession } from 'amazon-cognito-identity-js';
 import { ToastContainer, toast } from 'react-toastify';
@@ -59,7 +60,7 @@ function SignInForm(): JSX.Element {
           value={password}
           onChange={handleOnChange}
         />
-        <button type="submit">submit</button>
+        <Button name="submit" type="submit" />
       </form>
     </SignInContainer>
   );
