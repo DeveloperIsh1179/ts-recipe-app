@@ -5,23 +5,49 @@ import { FormContext } from 'contexts/form.context';
 import {
   AuthenticationContainer,
   HeaderContainer,
+  SignInBanner,
+  SignUpBanner,
 } from './authentication.styles';
 
 function Authentication(): JSX.Element {
   const { isNewUser, setIsNewUser } = useContext(FormContext);
 
-  const handleOnClick = () => {
-    setIsNewUser(!isNewUser);
+  const setIsNewUserTrue = () => {
+    setIsNewUser(true);
+    const signUp = document.getElementById('signUp');
+    const signIn = document.getElementById('signIn');
+    if (signUp && signIn) {
+      signUp.style.color = 'black';
+      signIn.style.color = 'grey';
+    }
+  };
+
+  const setIsNewUserFalse = () => {
+    setIsNewUser(false);
+    const signUp = document.getElementById('signUp');
+    const signIn = document.getElementById('signIn');
+    if (signUp && signIn) {
+      signUp.style.color = 'grey';
+      signIn.style.color = 'black';
+    }
   };
   return (
     <AuthenticationContainer>
       <HeaderContainer>
-        <div onClick={handleOnClick} role="presentation">
+        <SignUpBanner
+          id="signUp"
+          onClick={setIsNewUserTrue}
+          role="presentation"
+        >
           <h1>SIGN UP</h1>
-        </div>
-        <div onClick={handleOnClick} role="presentation">
+        </SignUpBanner>
+        <SignInBanner
+          id="signIn"
+          onClick={setIsNewUserFalse}
+          role="presentation"
+        >
           <h1>LOG IN</h1>
-        </div>
+        </SignInBanner>
       </HeaderContainer>
       {isNewUser
         ? (<SignUpForm />

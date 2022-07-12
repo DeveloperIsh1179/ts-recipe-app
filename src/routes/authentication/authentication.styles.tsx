@@ -13,3 +13,11 @@ export const HeaderContainer = styled.div`
   justify-content: space-between;
   width: 375px;
 `;
+
+export const SignInBanner = styled.div`
+color: grey;
+`;
+
+export const SignUpBanner = styled.div`
+color: black;
+`;
