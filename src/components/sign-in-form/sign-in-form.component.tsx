@@ -1,5 +1,5 @@
 import {
-  useState, ChangeEvent, FormEvent, useContext,
+  useState, ChangeEvent, FormEvent, useContext, useEffect,
 } from 'react';
 import FormInput from 'components/form-input/form-input.component';
 import Button from 'components/button/button.component';
@@ -17,6 +17,7 @@ const defaultFormFields = {
 };
 
 function SignInForm(): JSX.Element {
+  const [isLoading, setIsLoading] = useState(false);
   const { setInSession } = useContext(CognitoSessionContext);
   const [formFields, setFormFields] = useState(defaultFormFields);
 
@@ -31,6 +32,7 @@ function SignInForm(): JSX.Element {
 
   const handleOnSubmit = async (event: FormEvent) => {
     event.preventDefault();
+    setIsLoading(true);
     const result = await signInCognito(userName, password);
     if (result instanceof CognitoUserSession) {
       setInSession(true);
@@ -38,6 +40,7 @@ function SignInForm(): JSX.Element {
     } else {
       toast.error(`Log in failed: ${result}.`);
     }
+    setIsLoading(false);
     setFormFields(defaultFormFields);
   };
   return (
@@ -60,7 +63,9 @@ function SignInForm(): JSX.Element {
           value={password}
           onChange={handleOnChange}
         />
-        <Button name="submit" type="submit" />
+        <Button type="submit" disabled={isLoading}>
+          {isLoading ? '...LOADING' : 'SUBMIT'}
+        </Button>
       </form>
     </SignInContainer>
   );

@@ -1,17 +1,18 @@
 import { RefObject } from 'react';
 import { StyledButton } from './button.styles';
 
-type ButtonName = {
-  name: string;
+type ButtonProps = {
   type: 'submit' | 'reset' | 'button';
+  disabled: boolean;
+  children: string
 };
 
-function Button(props: ButtonName): JSX.Element {
-  const { name, type } = props;
+function Button(props: ButtonProps): JSX.Element {
+  const { children, type, disabled } = props;
   return (
     <div>
-      <StyledButton type={type}>
-        {name}
+      <StyledButton disabled={disabled} type={type}>
+        {children}
       </StyledButton>
     </div>
   );

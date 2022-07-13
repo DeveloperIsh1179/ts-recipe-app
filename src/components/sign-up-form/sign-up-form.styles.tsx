@@ -6,7 +6,10 @@ font-size: 12px;
 `;
 
 export const SignUpContainer = styled.div`
-  width: 275px;
+  width: 375px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 export const LabelContainer = styled.label`

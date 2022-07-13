@@ -12,6 +12,7 @@ const defaultFormFields = {
 };
 
 function SignUpForm(): JSX.Element {
+  const [isLoading, setIsLoading] = useState(false);
   const [formFields, setFormFields] = useState(defaultFormFields);
   const {
     email, password, name,
@@ -24,6 +25,7 @@ function SignUpForm(): JSX.Element {
 
   const handleOnSubmit = async (event: FormEvent) => {
     event.preventDefault();
+    setIsLoading(true);
     const result = await createCognitoSignUp(email, password, name);
     console.log(result);
     if (result instanceof Error) {
@@ -33,6 +35,7 @@ function SignUpForm(): JSX.Element {
     } else {
       toast.success('User created successfully');
     }
+    setIsLoading(false);
     setFormFields(defaultFormFields);
   };
 
@@ -64,7 +67,9 @@ function SignUpForm(): JSX.Element {
           value={password}
           onChange={handleOnChange}
         />
-        <Button type="submit" name="submit" />
+        <Button type="submit" disabled={isLoading}>
+          {isLoading ? '...LOADING' : 'SUBMIT'}
+        </Button>
       </form>
     </SignUpContainer>
   );
