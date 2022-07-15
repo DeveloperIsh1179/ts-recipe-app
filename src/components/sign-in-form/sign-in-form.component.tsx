@@ -1,13 +1,14 @@
 import {
-  useState, ChangeEvent, FormEvent, useContext, useEffect,
+  useState, ChangeEvent, FormEvent, useContext,
 } from 'react';
+import { useNavigate } from 'react-router-dom';
 import FormInput from 'components/form-input/form-input.component';
 import Button from 'components/button/button.component';
 import { signInCognito } from 'utils/amazon-cognito/amazon-cognito.utils';
 import { CognitoUserSession } from 'amazon-cognito-identity-js';
 import { ToastContainer, toast } from 'react-toastify';
 import { CognitoSessionContext } from 'contexts/cognito-session.context';
-import { SignInContainer } from './sign-in-form.styles';
+import { Form, SignInContainer } from './sign-in-form.styles';
 
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -17,6 +18,7 @@ const defaultFormFields = {
 };
 
 function SignInForm(): JSX.Element {
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const { setInSession } = useContext(CognitoSessionContext);
   const [formFields, setFormFields] = useState(defaultFormFields);
@@ -35,8 +37,10 @@ function SignInForm(): JSX.Element {
     setIsLoading(true);
     const result = await signInCognito(userName, password);
     if (result instanceof CognitoUserSession) {
+      const id = result.getIdToken().getJwtToken().toString();
       setInSession(true);
       toast.success('Logged in successfully.');
+      navigate(`/loggedIn/${id}`);
     } else {
       toast.error(`Log in failed: ${result}.`);
     }
@@ -46,7 +50,7 @@ function SignInForm(): JSX.Element {
   return (
     <SignInContainer>
       <ToastContainer />
-      <form onSubmit={handleOnSubmit}>
+      <Form onSubmit={handleOnSubmit}>
         <FormInput
           label="USERNAME"
           required
@@ -66,7 +70,7 @@ function SignInForm(): JSX.Element {
         <Button type="submit" disabled={isLoading}>
           {isLoading ? '...LOADING' : 'SUBMIT'}
         </Button>
-      </form>
+      </Form>
     </SignInContainer>
   );
 }

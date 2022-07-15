@@ -11,7 +11,7 @@ function App(): JSX.Element {
       <Route path="/" element={<Navigation />}>
         <Route index element={<Home />} />
         <Route path="auth" element={<Authentication />} />
-        <Route path="loggedIn" element={<LoggedIn />} />
+        <Route path="loggedIn:id" element={<LoggedIn />} />
       </Route>
     </Routes>
   );

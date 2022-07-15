@@ -6,3 +6,10 @@ display: flex;
 flex-direction: column;
 align-items: center;
 `;
+
+export const Form = styled.form`
+width: 375px;
+display:flex;
+flex-direction: column;
+align-items: center;
+`;
