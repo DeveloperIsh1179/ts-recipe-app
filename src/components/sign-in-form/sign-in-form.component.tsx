@@ -37,10 +37,11 @@ function SignInForm(): JSX.Element {
     setIsLoading(true);
     const result = await signInCognito(userName, password);
     if (result instanceof CognitoUserSession) {
-      const id = result.getIdToken().getJwtToken().toString();
+      const id = result.getIdToken().getJwtToken();
+      const stringId = JSON.stringify(id);
       setInSession(true);
       toast.success('Logged in successfully.');
-      navigate(`/loggedIn/${id}`);
+      navigate(`/loggedIn/${stringId}`);
     } else {
       toast.error(`Log in failed: ${result}.`);
     }
