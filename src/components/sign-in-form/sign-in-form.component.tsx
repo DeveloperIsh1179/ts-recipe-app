@@ -8,6 +8,7 @@ import { signInCognito } from 'utils/amazon-cognito/amazon-cognito.utils';
 import { CognitoUserSession } from 'amazon-cognito-identity-js';
 import { ToastContainer, toast } from 'react-toastify';
 import { CognitoSessionContext } from 'contexts/cognito-session.context';
+import md5 from 'md5';
 import { Form, SignInContainer } from './sign-in-form.styles';
 
 import 'react-toastify/dist/ReactToastify.css';
@@ -38,7 +39,7 @@ function SignInForm(): JSX.Element {
     const result = await signInCognito(userName, password);
     if (result instanceof CognitoUserSession) {
       const id = result.getIdToken().getJwtToken();
-      const stringId = JSON.stringify(id);
+      const stringId = md5(JSON.stringify(id));
       setInSession(true);
       toast.success('Logged in successfully.');
       navigate(`/loggedIn/${stringId}`);
