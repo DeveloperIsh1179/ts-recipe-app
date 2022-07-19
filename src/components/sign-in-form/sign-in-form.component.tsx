@@ -38,7 +38,7 @@ function SignInForm(): JSX.Element {
     setIsLoading(true);
     const result = await signInCognito(userName, password);
     if (result instanceof CognitoUserSession) {
-      const id = result.getIdToken().getJwtToken();
+      const id = result.getIdToken().payload;
       const stringId = md5(JSON.stringify(id));
       setInSession(true);
       toast.success('Logged in successfully.');
