@@ -35,7 +35,6 @@ function SignInForm(): JSX.Element {
 
   const handleOnSubmit = async (event: FormEvent) => {
     event.preventDefault();
-    console.log('this is a test');
     setIsLoading(true);
     const result = await signInCognito(userName, password);
     if (result instanceof CognitoUserSession) {
